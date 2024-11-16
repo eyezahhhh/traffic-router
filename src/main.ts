@@ -13,6 +13,18 @@ for (let route of routes) {
         const outgoing = Net.createConnection(route.to);
         incoming.pipe(outgoing);
         outgoing.pipe(incoming);
+
+        incoming.on("error", error => {
+            console.error("Incoming error", error);
+            incoming.destroy();
+            outgoing.destroy();
+        });
+
+        outgoing.on("error", error => {
+            console.error("Outgoing error", error);
+            outgoing.destroy();
+            incoming.destroy();
+        });
     });
 
     server.listen(route.port, "0.0.0.0");
