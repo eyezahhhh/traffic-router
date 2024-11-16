@@ -1,0 +1,9 @@
+[
+    {
+        "port": 25565,
+        "to": {
+            "host": "mc.hypixel.net",
+            "port": 25565
+        }
+    }
+]
